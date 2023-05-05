@@ -1,6 +1,5 @@
 package org.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,15 +17,6 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "books")
 public class Author {
 
-//    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private Set<Book> books;
-//
-//    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-//    @JoinColumn(name = "name_of_authors",nullable = false, insertable = false,updatable = false)
-//    @JsonIgnore
-//    private Book book;
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
@@ -35,12 +25,10 @@ public class Author {
             })
     @JoinTable(
             name = "book_author",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "author_id")}
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id")}
     )
     Set<Book> books = new HashSet<>();
-
-
 
     @Column(name = "nameAuthor")
     private String nameAuthor;

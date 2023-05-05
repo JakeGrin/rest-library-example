@@ -9,30 +9,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="book")
+@Table(name = "book")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(exclude = "authors")
-public class Book{
-
-//    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-//    @JoinColumn(name = "id",nullable = false, insertable = false,updatable = false)
-//    @JsonIgnore
-//    private Author author;
-//
-//    @OneToMany(mappedBy="book", fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private Set<Author> authors;
+public class Book {
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
-            },mappedBy = "books")
+            }, mappedBy = "books")
     @JsonIgnore
     private Set<Author> authors = new HashSet<>();
 

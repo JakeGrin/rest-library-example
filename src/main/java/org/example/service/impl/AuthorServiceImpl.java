@@ -12,8 +12,9 @@ import java.util.Optional;
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
-@Autowired
-private AuthorRepository authorRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
+
     @Override
     public void createAuthor(Author author) {
         authorRepository.save(author);
@@ -36,7 +37,7 @@ private AuthorRepository authorRepository;
 
     @Override
     public void deleteAuthor(int id) {
-         authorRepository.deleteById(id);
+        authorRepository.deleteById(id);
     }
 
     @Override

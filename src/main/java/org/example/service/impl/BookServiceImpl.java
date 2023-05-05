@@ -1,6 +1,5 @@
 package org.example.service.impl;
 
-import org.example.entity.Author;
 import org.example.entity.Book;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -38,7 +36,6 @@ public class BookServiceImpl implements BookService {
         bookTemp.setNameOfBook(book.getNameOfBook());
         bookTemp.setDateOfPublication(book.getDateOfPublication());
         bookTemp.setPublishingHouse(book.getPublishingHouse());
-//        bookTemp.setNameOfAuthors(book.getNameOfAuthors());
         bookRepository.save(bookTemp);
     }
 
@@ -98,16 +95,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getBooksWithGender(String gender) {
         List<Book> all = bookRepository.findAll();
-//        List<Book> books = new ArrayList<>();
-//        for (Book book : all) {
-//            Set<Author> authors = book.getAuthors();
-//            for (Author author : authors) {
-//                if (author.getGenderAuthor().equals(gender)) {
-//                    books.add(book);
-//                }
-//            }
-//        }
-//        return books;
         return bookRepository.findAllByAuthorGender(gender);
     }
 
@@ -115,12 +102,6 @@ public class BookServiceImpl implements BookService {
     public List<Book> getBooksWithDateOfBirthAuthors(LocalDate dateOfBirth) {
         List<Book> books = new ArrayList<>();
         List<Book> all = bookRepository.findAll();
-//        for (Book book : all) {
-//            LocalDate birthAuthor = book.getAuthor().getDateOfBirthAuthor();
-//            if (birthAuthor.equals(dateOfBirth)) {
-//                books.add(book);
-//            }
-//        }
         return books;
     }
 
