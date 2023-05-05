@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: create_table_author.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: insert_authors.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: create_table_book.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: insert_books.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: create_table_book_author.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: insert_table_book_author.yaml
+      relativeToChangelogFile: true

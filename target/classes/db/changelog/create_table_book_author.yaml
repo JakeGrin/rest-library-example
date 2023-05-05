@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id:  create_table_book_author
+      author:  gorodecki
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name:  book_id
+                  type:  integer
+              - column:
+                  name:  author_id
+                  type:  integer
+            tableName: book_author

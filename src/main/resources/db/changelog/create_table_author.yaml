@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id:  create_table_author
+      author:  gorodecki
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name:  name_author
+                  type:  varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name:  second_name_author
+                  type:  varchar(255)
+              - column:
+                  name:  date_of_birth_author
+                  type:  date
+              - column:
+                  name:  gender_author
+                  type:  varchar(255)
+              - column:
+                  name:  id
+                  type:  integer
+                  autoIncrement:  true
+                  constraints:
+                    nullable: false
+            tableName: author

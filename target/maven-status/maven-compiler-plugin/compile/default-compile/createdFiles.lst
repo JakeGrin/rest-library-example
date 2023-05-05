@@ -1,0 +1,7 @@
+org/example/Main.class
+org/example/service/api/AuthorService.class
+org/example/entity/Book.class
+org/example/service/impl/BookServiceImpl.class
+org/example/entity/Author.class
+org/example/service/impl/AuthorServiceImpl.class
+org/example/service/api/BookService.class

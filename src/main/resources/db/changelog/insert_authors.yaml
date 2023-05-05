@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_ricardo
+      author: gorodecki
+      changes:
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name:  name_author
+                  value:  'Ricardo'
+              - column:
+                  name:  second_name_author
+                  value:  'Lopes'
+              - column:
+                  name:  date_of_birth_author
+                  value:  "1966-01-22"
+              - column:
+                  name:  gender_author
+                  value:  'male'
+              - column:
+                  name:  id
+                  value:  1
+  - changeSet:
+      id: add_alfonso
+      author: gorodecki
+      changes:
+      - insert:
+         tableName: author
+         columns:
+          - column:
+                name:  name_author
+                value:  'Sovonarola'
+          - column:
+                name:  second_name_author
+                value:  'Italian'
+          - column:
+                name:  date_of_birth_author
+                value:  "1988-04-11"
+          - column:
+                name:  gender_author
+                value:  'female'
+          - column:
+                name:  id
+                value:  2
+  - changeSet:
+      id: add_pedro
+      author: gorodecki
+      changes:
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name_author
+                  value: 'Pedro'
+              - column:
+                  name: second_name_author
+                  value: 'Pascal'
+              - column:
+                  name: date_of_birth_author
+                  value: "1965-09-18"
+              - column:
+                  name: gender_author
+                  value: 'male'
+              - column:
+                  name: id
+                  value: 3

@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: h2
+server:
+  servlet:
+    context-path: /application
+---
+spring:
+  profiles: h2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:mem:mydb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  liquibase:
+    parameters:
+      textColumnType: VARCHAR(250)
+  h2:
+    console:
+      enabled: true

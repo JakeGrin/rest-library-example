@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id:  create_table_book
+      author:  gorodecki
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name:  name_of_book
+                  type:  varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name:  date_of_publication
+                  type:  date
+              - column:
+                  name:  publishing_house
+                  type:  varchar(255)
+              - column:
+                  name:  id
+                  type:  integer
+                  constraints:
+                    nullable: false
+                  autoIncrement:  true
+            tableName: book

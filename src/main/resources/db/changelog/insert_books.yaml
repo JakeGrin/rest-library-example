@@ -1,0 +1,96 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_spain_book
+      author: gorodecki
+      changes:
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name:  name_of_book
+                  value:  'Madrid in my heart'
+              - column:
+                  name:  date_of_publication
+                  value:  "1999-03-14"
+              - column:
+                  name:  publishing_house
+                  value:  'Salvador Dali Inc.'
+              - column:
+                  name:  id
+                  value:  1
+  - changeSet:
+      id: add_mexican_book
+      author: gorodecki
+      changes:
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name:  name_of_book
+                  value:  'El Dorado'
+              - column:
+                  name:  date_of_publication
+                  value:  "1901-06-24"
+              - column:
+                  name:  publishing_house
+                  value:  'Gwadalahara Inc.'
+              - column:
+                  name:  id
+                  value:  2
+  - changeSet:
+      id: add_columbia_book
+      author: gorodecki
+      changes:
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name:  name_of_book
+                  value:  'Escobar memories'
+              - column:
+                  name:  date_of_publication
+                  value:  "1993-08-15"
+              - column:
+                  name:  publishing_house
+                  value:  'Gaveria Inc.'
+              - column:
+                  name:  id
+                  value:  3
+  - changeSet:
+      id: add_italian_book
+      author: gorodecki
+      changes:
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name:  name_of_book
+                  value:  'I hate Gregorian calendar'
+              - column:
+                  name:  date_of_publication
+                  value:  "1999-05-13"
+              - column:
+                  name:  publishing_house
+                  value:  'Saint Pope Inc.'
+              - column:
+                  name:  id
+                  value:  4
+#  - changeSet:
+#      id: add_columbia_italian_book
+#      author: gorodecki
+#      changes:
+#        - insert:
+#            tableName: book
+#            columns:
+#              - column:
+#                  name:  name_of_book
+#                  value:  'Escobar memories'
+#              - column:
+#                  name:  date_of_publication
+#                  value:  "1993-08-15"
+#              - column:
+#                  name:  publishing_house
+#                  value:  'Gaveria Inc.'
+#              - column:
+#                  name:  id
+#                  value:  3
