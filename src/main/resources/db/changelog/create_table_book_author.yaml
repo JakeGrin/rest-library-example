@@ -6,6 +6,9 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
+                  name: id
+                  type: integer
+              - column:
                   name:  book_id
                   type:  integer
               - column:
