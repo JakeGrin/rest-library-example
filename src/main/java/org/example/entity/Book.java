@@ -18,17 +18,6 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "authors")
 public class Book {
 
-//    @ManyToMany(fetch = FetchType.EAGER,
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            }, mappedBy = "books")
-//    @JsonIgnore
-//    private Set<Author> authors = new HashSet<>();
-
-    @OneToMany(mappedBy = "book", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<BookAuthorLink> linkSet;
-
     @Column(name = "nameOfBook")
     private String nameOfBook;
     @Column(name = "dateOfPublication")

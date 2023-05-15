@@ -3,11 +3,17 @@ package org.example.controller;
 import org.example.entity.Book;
 import org.example.service.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,22 +23,25 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    @GetMapping("/bookName/{bookName}")
-    public ResponseEntity<List<Book>> getBooksWithBookName(@PathVariable ("bookName") String bookName){
-        return new ResponseEntity<>( bookService.getBooksWithBookName(bookName),HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Book>> getBooksWithBookName(@RequestParam String search){
+//        List<Book> books = bookService.getBooksWithBookName(search);
+//        return new ResponseEntity<>( books,HttpStatus.OK);
+//    }
 
-    @GetMapping("/dateOfPublication/{dateOfPublication}")
-    public ResponseEntity<List<Book>> getBooksWithDateOfPublication(
-            @PathVariable ("dateOfPublication") String dateOfPublication){
-        return new ResponseEntity<>( bookService.getBooksWithDateOfPublication(dateOfPublication),HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Book>> getBooksWithDateOfPublication(
+//            @RequestParam String search){
+////LocalDate date = LocalDate.parse(search);
+//        List<Book> booksWithDateOfPublication = bookService.getBooksWithDateOfPublication(search);
+//        return new ResponseEntity<>(booksWithDateOfPublication,HttpStatus.OK);
+//    }
 
-    @GetMapping("/nameOfPublishingHouse/{nameOfPublishingHouse}")
-    public ResponseEntity<List<Book>> getBooksWithNamePublishingHouse(
-            @PathVariable ("nameOfPublishingHouse") String nameOfPublishingHouse){
-        return new ResponseEntity<>( bookService.getBooksWithNamePublishingHouse(nameOfPublishingHouse),HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Book>> getBooksWithNamePublishingHouse(
+//            @RequestParam String search){
+//        return new ResponseEntity<>( bookService.getBooksWithNamePublishingHouse(search),HttpStatus.OK);
+//    }
 
     @GetMapping("/gender/{gender}")
     public ResponseEntity<List<Book>> getBooksWithGender(
@@ -46,10 +55,18 @@ public class BookController {
         return new ResponseEntity<>( bookService.getBooksWithDateOfBirthAuthors(dayOfBirthAuthors),HttpStatus.OK);
     }
     @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> books = bookService.getAllBooks();
+    public ResponseEntity<List<Book>> getAllBooks(@RequestParam String search) {
+        List<Book> books = bookService.getAllBooks(search);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
+
+
+
+//    @GetMapping
+//    public ResponseEntity<List<Book>> getAllBooks(@RequestParam LocalDate search) {
+//        List<Book> books = bookService.getAllBooks(search);
+//        return new ResponseEntity<>(books, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBook(@PathVariable("id") int id) {

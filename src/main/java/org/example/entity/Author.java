@@ -30,8 +30,8 @@ public class Author {
 //    )
 //    Set<Book> books = new HashSet<>();
 
-    @OneToMany(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<BookAuthorLink> linkSet;
+//    @OneToMany(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private Set<BookAuthorLink> linkSet;
 
     @Column(name = "nameAuthor")
     private String nameAuthor;

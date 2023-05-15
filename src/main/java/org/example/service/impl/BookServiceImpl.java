@@ -3,6 +3,7 @@ package org.example.service.impl;
 import org.example.entity.Book;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
+import org.example.repository.BookSpecification;
 import org.example.service.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,56 +46,36 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public List<Book> getAllBooks(final String search) {
+        return bookRepository.findAll(
+                BookSpecification.nameOfBookEqual(search)
+                .or(BookSpecification.publishingHouseEqual(search)));
     }
 
+//    @Override
+//    public List<Book> getBooksWithDateOfPublication(final String search) {
+//        return bookRepository.findAll(BookSpecification.dateOfPublicationEqual(String.valueOf(search))
+//                .or(BookSpecification.nameOfBookEqual(String.valueOf(search)))
+//                .or(BookSpecification.publishingHouseEqual(String.valueOf(search))));
+//    }
 
-    @Override
-    public List<Book> getBooksWithBookName(String bookName) {
-        List<Book> books = new ArrayList<>();
-        List<Book> all = bookRepository.findAll();
-        for (Book book : all) {
-            String nameOfBook = book.getNameOfBook();
-            boolean equals = nameOfBook.equals(bookName);
-            if (equals) {
-                books.add(book);
-            }
-        }
-        return books;
-    }
-
-    @Override
-    public List<Book> getBooksWithDateOfPublication(String dateOfPubl) {
-        LocalDate date = LocalDate.parse(dateOfPubl);
-
-        List<Book> books = new ArrayList<>();
-        List<Book> all = bookRepository.findAll();
-        for (Book book : all) {
-            LocalDate dateOfBook = book.getDateOfPublication();
-            if (dateOfBook.equals(date)) {
-                books.add(book);
-            }
-        }
-        return books;
-    }
-
-    @Override
-    public List<Book> getBooksWithNamePublishingHouse(String nameOfPubl) {
-        List<Book> books = new ArrayList<>();
-        List<Book> all = bookRepository.findAll();
-        for (Book book : all) {
-            String nameOfPublHouse = book.getPublishingHouse();
-            if (nameOfPublHouse.equals(nameOfPubl)) {
-                books.add(book);
-            }
-        }
-        return books;
-    }
+//    @Override
+//    public List<Book> getBooksWithNamePublishingHouse(final String publishingHouse) {
+////        List<Book> books = new ArrayList<>();
+////        List<Book> all = bookRepository.findAll();
+////        for (Book book : all) {
+////            String nameOfPublHouse = book.getPublishingHouse();
+////            if (nameOfPublHouse.equals(nameOfPubl)) {
+////                books.add(book);
+////            }
+////        }
+////        return books;
+//        return bookRepository.findAll(BookSpecification.publishingHouseEqual(publishingHouse));
+//    }
 
     @Override
     public List<Book> getBooksWithGender(String gender) {
-        List<Book> all = bookRepository.findAll();
+//        List<Book> all = bookRepository.findAll();
         return bookRepository.findAllByAuthorGender(gender);
     }
 
@@ -104,11 +85,22 @@ public class BookServiceImpl implements BookService {
         List<Book> all = bookRepository.findAll();
         return books;
     }
+//
+//    public List<Book> getBooksWithBookName(final String search) {
+//        return bookRepository.findAll(
+//                BookSpecification.nameOfBookEqual(search)
+//                        .or(BookSpecification.dateOfPublicationEqual(search))) ;
+//    }
 
-    @Override
-    public List<Book> getBooksWithNamesOfAuthors() {
-        return null;
-    }
+//    @Override
+//    public List<Book> getBooksWithDateOfPublication(String dateOfPubl) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Book> getBooksWithNamePublishingHouse(String nameOfPubl) {
+//        return null;
+//    }
 
     @Override
     public List<Book> getBooksWithCombinedMethod() {
