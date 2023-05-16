@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import com.fasterxml.classmate.AnnotationConfiguration;
+import org.example.entity.Author;
 import org.example.entity.Book;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;

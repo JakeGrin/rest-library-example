@@ -13,6 +13,8 @@ public interface BookService {
     void deleteBook(int id);
     List<Book> getAllBooks(String search);
 
+    List<Book> getBooksWithDateOfPublication(LocalDate search);
+
     //    List<Book> getBooksWithBookName(String bookName);
 //
 //    List<Book> getBooksWithDateOfPublication(String dateOfPubl);

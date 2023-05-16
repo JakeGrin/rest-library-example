@@ -23,30 +23,11 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-//    @GetMapping
-//    public ResponseEntity<List<Book>> getBooksWithBookName(@RequestParam String search){
-//        List<Book> books = bookService.getBooksWithBookName(search);
-//        return new ResponseEntity<>( books,HttpStatus.OK);
-//    }
-
-//    @GetMapping
-//    public ResponseEntity<List<Book>> getBooksWithDateOfPublication(
-//            @RequestParam String search){
-////LocalDate date = LocalDate.parse(search);
-//        List<Book> booksWithDateOfPublication = bookService.getBooksWithDateOfPublication(search);
-//        return new ResponseEntity<>(booksWithDateOfPublication,HttpStatus.OK);
-//    }
-
-//    @GetMapping
-//    public ResponseEntity<List<Book>> getBooksWithNamePublishingHouse(
-//            @RequestParam String search){
-//        return new ResponseEntity<>( bookService.getBooksWithNamePublishingHouse(search),HttpStatus.OK);
-//    }
-
-    @GetMapping("/gender/{gender}")
+    @GetMapping("/gender")
     public ResponseEntity<List<Book>> getBooksWithGender(
-            @PathVariable ("gender") String gender){
-        return new ResponseEntity<>( bookService.getBooksWithGender(gender),HttpStatus.OK);
+            @RequestParam String search){
+return new ResponseEntity<>(bookService.getBooksWithGender(search),HttpStatus.OK);
+//        return new ResponseEntity<>( bookService.getBooksWithGender(gender),HttpStatus.OK);
     }
 
     @GetMapping("/dateOfBirthAuthors/{dayOfBirthAuthors}")
@@ -62,11 +43,11 @@ public class BookController {
 
 
 
-//    @GetMapping
-//    public ResponseEntity<List<Book>> getAllBooks(@RequestParam LocalDate search) {
-//        List<Book> books = bookService.getAllBooks(search);
-//        return new ResponseEntity<>(books, HttpStatus.OK);
-//    }
+    @GetMapping("/date")
+    public ResponseEntity<List<Book>> getAllBooksByDate(@RequestParam String search) {
+        List<Book> books = bookService.getBooksWithDateOfPublication(LocalDate.parse(search));
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBook(@PathVariable("id") int id) {

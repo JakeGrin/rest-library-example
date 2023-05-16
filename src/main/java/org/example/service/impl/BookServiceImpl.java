@@ -52,12 +52,10 @@ public class BookServiceImpl implements BookService {
                 .or(BookSpecification.publishingHouseEqual(search)));
     }
 
-//    @Override
-//    public List<Book> getBooksWithDateOfPublication(final String search) {
-//        return bookRepository.findAll(BookSpecification.dateOfPublicationEqual(String.valueOf(search))
-//                .or(BookSpecification.nameOfBookEqual(String.valueOf(search)))
-//                .or(BookSpecification.publishingHouseEqual(String.valueOf(search))));
-//    }
+    @Override
+    public List<Book> getBooksWithDateOfPublication(final LocalDate search) {
+        return bookRepository.findAll(BookSpecification.dateOfPublicationEqual(search));
+    }
 
 //    @Override
 //    public List<Book> getBooksWithNamePublishingHouse(final String publishingHouse) {
@@ -74,9 +72,10 @@ public class BookServiceImpl implements BookService {
 //    }
 
     @Override
-    public List<Book> getBooksWithGender(String gender) {
+    public List<Book> getBooksWithGender(String search) {
 //        List<Book> all = bookRepository.findAll();
-        return bookRepository.findAllByAuthorGender(gender);
+
+        return bookRepository.findAll(BookSpecification.genderEqual(search));
     }
 
     @Override
