@@ -31,9 +31,8 @@ public class BookSpecification {
 //                    cb.equal(bookAuthorAuthor.get("author")));
 //              return cb.equal(bookAuthorAuthor.get("genderAuthor"),genderAuthor)
 //         return cb.equal(bookAuthorRoot.join(Book_.ID).join(Author_.ID).get("genderAuthor"), genderAuthor);
-            Path<Object> genderAuthor1 = root.get(BookAuthor_.AUTHOR).get("genderAuthor");
-            return cq.where(cb.equal(genderAuthor1,genderAuthor))
-                    .where(cb.equ);
+//            Path<Object> genderAuthor1 = root.get(BookAuthor_.AUTHOR).get("genderAuthor");
+            return cb.equal(book.get(BookAuthor_.AUTHOR).get("genderAuthor"),genderAuthor);
 
 
 
