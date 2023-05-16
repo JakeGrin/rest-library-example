@@ -24,10 +24,10 @@ public class BookAuthor {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE},optional = false, targetEntity = Author.class)
     @JoinColumn(name = "author_id",referencedColumnName="id")
     private Author author;
-//
-//    @Column(name="book_id",insertable = false,updatable = false)
-//    String book_id;
-//
-//    @Column(name="author_id",insertable = false,updatable = false)
-//    String author_id;
+
+    @Column(name="book_id",insertable = false,updatable = false)
+    String book_id;
+
+    @Column(name="author_id",insertable = false,updatable = false)
+    String author_id;
 }

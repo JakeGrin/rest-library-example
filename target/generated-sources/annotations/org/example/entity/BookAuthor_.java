@@ -11,10 +11,14 @@ public abstract class BookAuthor_ {
 	public static volatile SingularAttribute<BookAuthor, Author> author;
 	public static volatile SingularAttribute<BookAuthor, Book> book;
 	public static volatile SingularAttribute<BookAuthor, Integer> id;
+	public static volatile SingularAttribute<BookAuthor, String> book_id;
+	public static volatile SingularAttribute<BookAuthor, String> author_id;
 
 	public static final String AUTHOR = "author";
 	public static final String BOOK = "book";
 	public static final String ID = "id";
+	public static final String BOOK_ID = "book_id";
+	public static final String AUTHOR_ID = "author_id";
 
 }
 

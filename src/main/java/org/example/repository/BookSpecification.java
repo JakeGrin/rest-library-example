@@ -24,6 +24,13 @@ public class BookSpecification {
     public static Specification<Book> genderEqual(String genderAuthor) {
         return (book, cq, cb) -> {
             Root<BookAuthor> root = cq.from(BookAuthor.class);
+//            root.join("author");
+//            root.join("book");
+            Path<Object> objectPath = root.get(BookAuthor_.ID);
+            Path<Object> genderAuthor1 = root.get(BookAuthor_.AUTHOR).get("genderAuthor");
+            cq.where(cb.equal(root.get("book_id"),root.get(BookAuthor_.BOOK).get("id")),
+                    cb.equal(root.get("author_id"),root.get(BookAuthor_.AUTHOR).get("id")));
+
 //            Join<BookAuthor, Book> bookAuthorBook = bookAuthorRoot.join("book");
 //            Join<BookAuthor, Author> bookAuthorAuthor = bookAuthorBook.join("author");
 //            return cb.equal(bookAuthorJoin.get("genderAuthor"), genderAuthor);
@@ -31,8 +38,8 @@ public class BookSpecification {
 //                    cb.equal(bookAuthorAuthor.get("author")));
 //              return cb.equal(bookAuthorAuthor.get("genderAuthor"),genderAuthor)
 //         return cb.equal(bookAuthorRoot.join(Book_.ID).join(Author_.ID).get("genderAuthor"), genderAuthor);
-//            Path<Object> genderAuthor1 = root.get(BookAuthor_.AUTHOR).get("genderAuthor");
-            return cb.equal(book.get(BookAuthor_.AUTHOR).get("genderAuthor"),genderAuthor);
+//            cq.where(cb.equal(root.get(BookAuthor_.AUTHOR).get("genderAuthor"), genderAuthor));
+            return cb.equal(genderAuthor1,genderAuthor);
 
 
 
