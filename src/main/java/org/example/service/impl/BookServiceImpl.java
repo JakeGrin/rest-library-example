@@ -1,20 +1,30 @@
 package org.example.service.impl;
 
+import org.example.entity.Author;
 import org.example.entity.Book;
+import org.example.entity.BookAuthor;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
 import org.example.repository.BookSpecification;
 import org.example.service.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Service
 public class BookServiceImpl implements BookService {
+    @Autowired
+    private EntityManager em;
     @Autowired
     private BookRepository bookRepository;
 
@@ -72,10 +82,36 @@ public class BookServiceImpl implements BookService {
 //    }
 
     @Override
-    public List<Book> getBooksWithGender(String search) {
-//        List<Book> all = bookRepository.findAll();
+    public List<Book> getBooksWithGender(String genderAuthor) {
 
-        return bookRepository.findAll(BookSpecification.genderEqual(search));
+
+
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+            Root<Book> book = cq.from(Book.class);
+            Root<BookAuthor> bookAuthorRoot = cq.from(BookAuthor.class);
+            Join<BookAuthor, Author> author = bookAuthorRoot.join("author");
+//            Join<BookAuthor, Book> bookRoot = bookAuthorRoot.join("book");
+
+            Predicate equalityAuthorPredicate = cb.equal(
+                    bookAuthorRoot.get("author_id"),
+                    author.get("id")
+            );
+
+            Predicate equalityBookPredicate = cb.equal(
+                    bookAuthorRoot.get("book_id"),
+                    book.get("id")
+            );
+
+            Predicate equalityGenderPredicate = cb.equal(
+                    author.get("genderAuthor"),
+                    genderAuthor);
+
+            cq.where(cb.and(equalityAuthorPredicate,equalityBookPredicate,equalityGenderPredicate));
+            cq.select(book);
+            List<Book> result = em.createQuery(cq).getResultList();
+
+            return result;
     }
 
     @Override
