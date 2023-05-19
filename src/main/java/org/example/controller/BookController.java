@@ -23,18 +23,18 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    @GetMapping("/gender")
-    public ResponseEntity<List<Book>> getBooksWithGender(
-            @RequestParam String search){
-return new ResponseEntity<>(bookService.getBooksWithGender(search),HttpStatus.OK);
-//        return new ResponseEntity<>( bookService.getBooksWithGender(gender),HttpStatus.OK);
-    }
+//    @GetMapping("/gender")
+//    public ResponseEntity<List<Book>> getBooksWithGender(
+//            @RequestParam String search){
+//return new ResponseEntity<>(bookService.getBooksWithGender(search),HttpStatus.OK);
+//    }
 
-    @GetMapping("/dateOfBirthAuthors/{dayOfBirthAuthors}")
-    public ResponseEntity<List<Book>> getBooksWithDateOfBirthAuthors(
-            @PathVariable ("dayOfBirthAuthors") LocalDate dayOfBirthAuthors){
-        return new ResponseEntity<>( bookService.getBooksWithDateOfBirthAuthors(dayOfBirthAuthors),HttpStatus.OK);
-    }
+//    @GetMapping("/date")
+//    public ResponseEntity<List<Book>> getBooksWithDateOfBirthAuthors(
+//            @RequestParam  String search){
+//        List<Book> books = bookService.getBooksWithDateOfBirthAuthors(LocalDate.parse(search));
+//        return new ResponseEntity<>( books,HttpStatus.OK);
+//    }
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks(@RequestParam String search) {
         List<Book> books = bookService.getAllBooks(search);
@@ -45,7 +45,7 @@ return new ResponseEntity<>(bookService.getBooksWithGender(search),HttpStatus.OK
 
     @GetMapping("/date")
     public ResponseEntity<List<Book>> getAllBooksByDate(@RequestParam String search) {
-        List<Book> books = bookService.getBooksWithDateOfPublication(LocalDate.parse(search));
+        List<Book> books = bookService.getBooksWithDate(LocalDate.parse(search));
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
