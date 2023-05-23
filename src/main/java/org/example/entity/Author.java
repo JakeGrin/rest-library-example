@@ -1,11 +1,10 @@
 package org.example.entity;
 
 import lombok.*;
+import org.example.entity.enums.Gender;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -17,30 +16,14 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "books")
 public class Author {
 
-
-//    @ManyToMany(fetch = FetchType.EAGER,
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            })
-//    @JoinTable(
-//            name = "book_author",
-//            joinColumns = {@JoinColumn(name = "book_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "author_id")}
-//    )
-//    Set<Book> books = new HashSet<>();
-
-//    @OneToMany(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    private Set<BookAuthorLink> linkSet;
-
     @Column(name = "nameAuthor")
-    private String nameAuthor;
+    private String name;
     @Column(name = "secondNameAuthor")
-    private String secondNameAuthor;
+    private String secondName;
     @Column(name = "dateOfBirthAuthor")
-    private LocalDate dateOfBirthAuthor;
+    private LocalDate dateOfBirth;
     @Column(name = "genderAuthor")
-    private String genderAuthor;
+    private Gender gender;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;

@@ -28,10 +28,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void updateAuthor(Author author, int id) {
         Author authorTemp = authorRepository.findById(id).get();
-        authorTemp.setGenderAuthor(author.getGenderAuthor());
-        authorTemp.setNameAuthor(author.getNameAuthor());
-        authorTemp.setSecondNameAuthor(author.getSecondNameAuthor());
-        authorTemp.setDateOfBirthAuthor(author.getDateOfBirthAuthor());
+        authorTemp.setGender(author.getGender());
+        authorTemp.setName(author.getName());
+        authorTemp.setSecondName(author.getSecondName());
+        authorTemp.setDateOfBirth(author.getDateOfBirth());
         authorRepository.save(authorTemp);
     }
 

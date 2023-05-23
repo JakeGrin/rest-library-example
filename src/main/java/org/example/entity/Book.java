@@ -1,12 +1,9 @@
 package org.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "book")
@@ -15,11 +12,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(exclude = "authors")
 public class Book {
 
     @Column(name = "nameOfBook")
-    private String nameOfBook;
+    private String name;
     @Column(name = "dateOfPublication")
     private LocalDate dateOfPublication;
     @Column(name = "publishingHouse")
