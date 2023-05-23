@@ -1,21 +1,22 @@
 package org.example.service.impl;
 
-import org.example.entity.Author;
 import org.example.entity.Book;
 import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
+import org.example.repository.BookSpecification;
 import org.example.service.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
+
 
 @Service
 public class BookServiceImpl implements BookService {
+
     @Autowired
     private BookRepository bookRepository;
 
@@ -35,10 +36,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBook(Book book, int id) {
         Book bookTemp = bookRepository.findById(id).get();
-        bookTemp.setNameOfBook(book.getNameOfBook());
+        bookTemp.setName(book.getName());
         bookTemp.setDateOfPublication(book.getDateOfPublication());
         bookTemp.setPublishingHouse(book.getPublishingHouse());
-//        bookTemp.setNameOfAuthors(book.getNameOfAuthors());
         bookRepository.save(bookTemp);
     }
 
@@ -48,86 +48,112 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public List<Book> getAllBooks(final String search) {
+        return bookRepository.findAll(
+                 BookSpecification.nameOfBookEqual(search)
+                .or(BookSpecification.publishingHouseEqual(search))
+                .or(BookSpecification.genderEqual(search)));
     }
 
-
-    @Override
-    public List<Book> getBooksWithBookName(String bookName) {
-        List<Book> books = new ArrayList<>();
-        List<Book> all = bookRepository.findAll();
-        for (Book book : all) {
-            String nameOfBook = book.getNameOfBook();
-            boolean equals = nameOfBook.equals(bookName);
-            if (equals) {
-                books.add(book);
-            }
-        }
-        return books;
+    public List<Book> getBooksWithDate(final LocalDate search) {
+        return bookRepository.findAll(BookSpecification.dateOfPublicationEqual(search)
+                .or(BookSpecification.dayOfBirthEqual(search)));
     }
 
-    @Override
-    public List<Book> getBooksWithDateOfPublication(String dateOfPubl) {
-        LocalDate date = LocalDate.parse(dateOfPubl);
+//    @Override
+//    public List<Book> getBooksWithNamePublishingHouse(final String publishingHouse) {
+////        List<Book> books = new ArrayList<>();
+////        List<Book> all = bookRepository.findAll();
+////        for (Book book : all) {
+////            String nameOfPublHouse = book.getPublishingHouse();
+////            if (nameOfPublHouse.equals(nameOfPubl)) {
+////                books.add(book);
+////            }
+////        }
+////        return books;
+//        return bookRepository.findAll(BookSpecification.publishingHouseEqual(publishingHouse));
+//    }
 
-        List<Book> books = new ArrayList<>();
-        List<Book> all = bookRepository.findAll();
-        for (Book book : all) {
-            LocalDate dateOfBook = book.getDateOfPublication();
-            if (dateOfBook.equals(date)) {
-                books.add(book);
-            }
-        }
-        return books;
-    }
+//    @Override
+//    public List<Book> getBooksWithGender(String genderAuthor) {
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+//            Root<Book> book = cq.from(Book.class);
+//            Root<BookAuthor> bookAuthorRoot = cq.from(BookAuthor.class);
+//            Join<BookAuthor, Author> author = bookAuthorRoot.join("author");
+////            Join<BookAuthor, Book> bookRoot = bookAuthorRoot.join("book");
+//
+//            Predicate equalityAuthorPredicate = cb.equal(
+//                    bookAuthorRoot.get("author_id"),
+//                    author.get("id")
+//            );
+//
+//            Predicate equalityBookPredicate = cb.equal(
+//                    bookAuthorRoot.get("book_id"),
+//                    book.get("id")
+//            );
+//
+//            Predicate equalityGenderPredicate = cb.equal(
+//                    author.get("genderAuthor"),
+//                    genderAuthor);
+//
+//            cq.where(cb.and(equalityAuthorPredicate,equalityBookPredicate,equalityGenderPredicate));
+//            cq.select(book);
+//            List<Book> result = em.createQuery(cq).getResultList();
+//
+//            return result;
+//    }
 
-    @Override
-    public List<Book> getBooksWithNamePublishingHouse(String nameOfPubl) {
-        List<Book> books = new ArrayList<>();
-        List<Book> all = bookRepository.findAll();
-        for (Book book : all) {
-            String nameOfPublHouse = book.getPublishingHouse();
-            if (nameOfPublHouse.equals(nameOfPubl)) {
-                books.add(book);
-            }
-        }
-        return books;
-    }
+//    @Override
+//    public List<Book> getBooksWithDateOfBirthAuthors(LocalDate search) {
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+//        Root<Book> book = cq.from(Book.class);
+//        Root<BookAuthor> bookAuthorRoot = cq.from(BookAuthor.class);
+//        Join<BookAuthor, Author> author = bookAuthorRoot.join("author");
+////            Join<BookAuthor, Book> bookRoot = bookAuthorRoot.join("book");
+//
+//        Predicate equalityAuthorPredicate = cb.equal(
+//                bookAuthorRoot.get("author_id"),
+//                author.get("id")
+//        );
+//
+//        Predicate equalityBookPredicate = cb.equal(
+//                bookAuthorRoot.get("book_id"),
+//                book.get("id")
+//        );
+//
+//        Predicate equalityGenderPredicate = cb.equal(
+//                author.get("dateOfBirth"),
+//                dateOfBirth);
+//
+//        cq.where(cb.and(equalityAuthorPredicate,equalityBookPredicate,equalityGenderPredicate));
+//        cq.select(book);
+//        List<Book> result = em.createQuery(cq).getResultList();
+//
+////        return result;
+//        return bookRepository.findAll(
+//                BookSpecification.dayOfBirthEqual(search)
+//                        .or(BookSpecification.dateOfPublicationEqual(search)));
+//    }
 
-    @Override
-    public List<Book> getBooksWithGender(String gender) {
-        List<Book> all = bookRepository.findAll();
-//        List<Book> books = new ArrayList<>();
-//        for (Book book : all) {
-//            Set<Author> authors = book.getAuthors();
-//            for (Author author : authors) {
-//                if (author.getGenderAuthor().equals(gender)) {
-//                    books.add(book);
-//                }
-//            }
-//        }
-//        return books;
-        return bookRepository.findAllByAuthorGender(gender);
-    }
 
-    @Override
-    public List<Book> getBooksWithDateOfBirthAuthors(LocalDate dateOfBirth) {
-        List<Book> books = new ArrayList<>();
-        List<Book> all = bookRepository.findAll();
-//        for (Book book : all) {
-//            LocalDate birthAuthor = book.getAuthor().getDateOfBirthAuthor();
-//            if (birthAuthor.equals(dateOfBirth)) {
-//                books.add(book);
-//            }
-//        }
-        return books;
-    }
+//
+//    public List<Book> getBooksWithBookName(final String search) {
+//        return bookRepository.findAll(
+//                BookSpecification.nameOfBookEqual(search)
+//                        .or(BookSpecification.dateOfPublicationEqual(search))) ;
+//    }
 
-    @Override
-    public List<Book> getBooksWithNamesOfAuthors() {
-        return null;
-    }
+//    @Override
+//    public List<Book> getBooksWithDateOfPublication(String dateOfPubl) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Book> getBooksWithNamePublishingHouse(String nameOfPubl) {
+//        return null;
+//    }
 
     @Override
     public List<Book> getBooksWithCombinedMethod() {

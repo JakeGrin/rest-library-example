@@ -11,14 +11,11 @@ public interface BookService {
     Optional<Book> getBook(int id);
     void updateBook(Book book,int id);
     void deleteBook(int id);
-    List<Book> getAllBooks();
+    List<Book> getAllBooks(String search);
 
-    List<Book> getBooksWithBookName(String bookName);
+    List<Book> getBooksWithDate(LocalDate search);
 
-    List<Book> getBooksWithDateOfPublication(String dateOfPubl);
-    List<Book> getBooksWithNamePublishingHouse(String nameOfPubl);
-    List<Book> getBooksWithGender(String gender);
-    List<Book> getBooksWithDateOfBirthAuthors(LocalDate dateOfBirth);
-    List<Book> getBooksWithNamesOfAuthors();
+//    List<Book> getBooksWithGender(String gender);
+//    List<Book> getBooksWithDateOfBirthAuthors(LocalDate dateOfBirth);
     List<Book> getBooksWithCombinedMethod();
 }
