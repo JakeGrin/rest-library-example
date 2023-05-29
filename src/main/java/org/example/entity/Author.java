@@ -23,6 +23,7 @@ public class Author {
     @Column(name = "dateOfBirthAuthor")
     private LocalDate dateOfBirth;
     @Column(name = "genderAuthor")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

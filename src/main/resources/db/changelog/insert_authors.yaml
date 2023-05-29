@@ -17,7 +17,7 @@ databaseChangeLog:
                   value:  "1966-01-22"
               - column:
                   name:  gender_author
-                  value:  'male'
+                  value:  'MALE'
               - column:
                   name:  id
                   value:  1
@@ -39,7 +39,7 @@ databaseChangeLog:
                 value:  "1988-04-11"
           - column:
                 name:  gender_author
-                value:  'female'
+                value:  'FEMALE'
           - column:
                 name:  id
                 value:  2
@@ -61,7 +61,7 @@ databaseChangeLog:
                   value: "1965-09-18"
               - column:
                   name: gender_author
-                  value: 'male'
+                  value: 'MALE'
               - column:
                   name: id
                   value: 3

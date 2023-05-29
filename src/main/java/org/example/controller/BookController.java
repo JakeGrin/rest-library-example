@@ -6,9 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/books")
@@ -22,12 +26,25 @@ public class BookController {
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks(@RequestParam final String search) {
         List<Book> books = bookService.getAllBooks(search);
-        return new ResponseEntity<>(books, HttpStatus.OK);
+        List<Book> collect = books.stream().distinct().collect(Collectors.toList());
+        return new ResponseEntity<>(collect, HttpStatus.OK);
     }
 
-    @GetMapping("/date")
-    public ResponseEntity<List<Book>> getAllBooksByDate(@RequestParam final String search) {
-        List<Book> books = bookService.getBooksWithDate(LocalDate.parse(search));
+    @GetMapping("/dateBirth")
+    public ResponseEntity<List<Book>> getAllBooksByDateOfBirth(@RequestParam final String[] search) {
+        List<Book> result = new ArrayList<>();
+        for (String s:search) {
+            List<Book> books = bookService.getBooksWithDateOfBirth(LocalDate.parse(s));
+            result.addAll(books);
+        }
+        List<Book> collect = result.stream().distinct().collect(Collectors.toList());
+        return new ResponseEntity<>(collect, HttpStatus.OK);
+    }
+
+    @GetMapping("/datePubl")
+    public ResponseEntity<List<Book>> getAllBooksByDateOfPublication(@RequestParam final String search) {
+        List<Book> books = bookService.getBooksWithDateOfPubl(LocalDate.parse(search));
+//        List<Book> collect = books.stream().distinct().collect(Collectors.toList());
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
